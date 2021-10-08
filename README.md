@@ -29,7 +29,6 @@ knowledge I learn from this course.</p>
 - As a user, I want to be able to select a team and list all the players on that team.
 - As a user, I want to be able to check how many goals a team have scored.
 - As a user, I want to be able to know how many goals a player has scored.
-- As a user, I want to know if a player is injured.
-- As a user, I want to know the position a player.
+- As a user, I want to know the position a player played.
 
    
