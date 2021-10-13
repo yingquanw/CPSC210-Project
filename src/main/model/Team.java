@@ -21,8 +21,13 @@ public class Team {
         return name;
     }
 
+    //EFFECTS: return the list of all players in the team
+    public List<Player> allPlayers() {
+        return players;
+    }
+
     //EFFECTS: Produce a list of names for all the player in the team
-    public ArrayList<String> playerList() {
+    public ArrayList<String> playerNameList() {
         ArrayList<String> names = new ArrayList<>();
         for (Player next : players) {
             names.add(next.getName());
@@ -58,7 +63,7 @@ public class Team {
     //         otherwise return false
     public boolean removePlayer(String name) {
         for (Player next : players) {
-            if (name == next.getName()) {
+            if (name.equals(next.getName())) {
                 players.remove(next);
                 return true;
             }
@@ -80,7 +85,7 @@ public class Team {
     public ArrayList<String> keyStatsOfAttackers() {
         ArrayList<String> keyStatsOfAttackers = new ArrayList<>();
         for (Player next : players) {
-            if (next.getPosition() == "ATT") {
+            if (next.getPosition().equals("ATT")) {
                 String attackerStats = next.getName() + " No." + next.getNumber() + " Goals: " + next.getGoals()
                         + " Assists: " + next.getAssists();
                 keyStatsOfAttackers.add(attackerStats);
@@ -93,7 +98,7 @@ public class Team {
     public ArrayList<String> keyStatsOfMidfielders() {
         ArrayList<String> keyStatsOfMidfielders = new ArrayList<>();
         for (Player next : players) {
-            if (next.getPosition() == "MID") {
+            if (next.getPosition().equals("MID")) {
                 String midfielderStats = next.getName() + " No." + next.getNumber() + " Passes: "
                         + next.getPasses() + " Success Passes: " + next.getSuccessPasses() + " Passing Accuracy: "
                         + next.passingAccuracy();
@@ -107,7 +112,7 @@ public class Team {
     public ArrayList<String> keyStatsOfDefenders() {
         ArrayList<String> keyStatsOfDefenders = new ArrayList<>();
         for (Player next : players) {
-            if (next.getPosition() == "DEF") {
+            if (next.getPosition().equals("DEF")) {
                 String defenderStats = next.getName() + " No." + next.getNumber() + " Interceptions: "
                         + next.getInterceptions() + " Tackles Won: " + next.getTacklesWon();
                 keyStatsOfDefenders.add(defenderStats);
@@ -120,7 +125,7 @@ public class Team {
     //         return false otherwise
     public boolean containsPlayerName(String name) {
         for (Player next : players) {
-            if (name == next.getName()) {
+            if (name.equals(next.getName())) {
                 return true;
             }
         }
@@ -142,7 +147,7 @@ public class Team {
     //EFFECTS: return the player with the provided name
     public Player getPlayer(String name) {
         for (Player next : players) {
-            if (name == next.getName()) {
+            if (name.equals(next.getName())) {
                 return next;
             }
         }

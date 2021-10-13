@@ -95,7 +95,16 @@ class PlayerTest {
         myPlayer.addPasses(1);
         assertEquals(1, myPlayer.getPasses());
         assertEquals(0, myPlayer.getSuccessPasses());
-        assertEquals(0,myPlayer.passingAccuracy());
+        assertTrue(myPlayer.passingAccuracy() == 0);
+    }
+
+    @Test
+    public void passingAccuracyDenominatorZeroTest() {
+        assertEquals(0, myPlayer.getPasses());
+        assertEquals(0, myPlayer.getSuccessPasses());
+        myPlayer.addSuccessPasses(1);
+        assertEquals(1, myPlayer.getSuccessPasses());
+        assertTrue(myPlayer.passingAccuracy() == 0);
     }
 
     @Test

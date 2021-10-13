@@ -49,12 +49,21 @@ public class TeamTest {
     }
 
     @Test
-    public void playerListTest() {
+    public void allPlayersTest() {
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(myTeam.getPlayer("Mohamed Salah"));
+        playerList.add(myTeam.getPlayer("Thiago Alcantara"));
+        playerList.add(myTeam.getPlayer("Joe Matip"));
+        assertEquals(playerList, myTeam.allPlayers());
+    }
+
+    @Test
+    public void playerNameListTest() {
         ArrayList<String> playerList = new ArrayList<>();
         playerList.add("Mohamed Salah");
         playerList.add("Thiago Alcantara");
         playerList.add("Joe Matip");
-        assertEquals(playerList, myTeam.playerList());
+        assertEquals(playerList, myTeam.playerNameList());
     }
 
     @Test
