@@ -1,7 +1,7 @@
 # My Home Team 
 
 ##1. What will the application do?
-   <p>T This application is a tool to give users overview of a team. Users can use this application to check the 
+   <p>This application is a tool to give users overview of a team. Users can use this application to check the 
 statistics and performance of the team as well as the players in the team. The users can also change these statistics 
 for the team and players, as they will change as the season progresses. This application also allows you to add or 
 remove players, as in reality, they will join the team or leave the team.
@@ -21,13 +21,12 @@ will be using in real life. This project is a really good chance for me to reall
 knowledge I learned from this course.</p>
 
 #User Stories
-- As a user, I want to be able to select a team and add a new player to the team.
-- As a user, I want to be able to select a team and remove a player from the team.
-- As a user, I want to be able to create a new team.
-- As a user, I want to be able to select a player on a team and add a new statistic for that player.
-- As a user, I want to be able to select a team and list all the players on that team.
-- As a user, I want to be able to check how many goals a team has scored.
+- As a user, I want to be able to create a new player and add this player to the team.
+- As a user, I want to be able to remove a player from the team.
+- As a user, I want to be able to know the name of my team and be able to change it.
+- As a user, I want to be able to select a player in the team and add new statistics for that player.
+- As a user, I want to be able to know all the players in the team, and also their detailed statistics.
+- As a user, I want to be able to check how many goals my team has scored.
 - As a user, I want to be able to know how many goals a player has scored.
-
 
    

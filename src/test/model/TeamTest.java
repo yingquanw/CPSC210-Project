@@ -43,10 +43,14 @@ public class TeamTest {
         myTeam.addPlayer(matip);
     }
 
+
     @Test
-    public void getNameTest() {
+    public void changeNameTest() {
         assertEquals("Liverpool", myTeam.getName());
+        myTeam.changeName("Chelsea");
+        assertEquals("Chelsea", myTeam.getName());
     }
+
 
     @Test
     public void allPlayersTest() {
@@ -128,54 +132,6 @@ public class TeamTest {
         statsOfAllPlayers.add("Joe Matip No.32 Age: 27 Position: DEF Goals: 0 Assists: 1 Passes: 210 " +
                 "Success passes: 74 Interceptions: 19 Tackles Won: 8");
         assertEquals(statsOfAllPlayers, myTeam.statsOfAllPlayers());
-    }
-
-    @Test
-    public void keyStatsOfAttackersTest() {
-        Player jota = new Player("Diogo Jota",20,24, "ATT");
-        jota.addGoals(2);
-        jota.addAssists(7);
-        jota.addPasses(120);
-        jota.addSuccessPasses(90);
-        jota.addInterceptions(5);
-        jota.addTacklesWon(0);
-        myTeam.addPlayer(jota);
-        ArrayList<String> keyStatsOfAttackers = new ArrayList<>();
-        keyStatsOfAttackers.add("Mohamed Salah No.11 Goals: 12 Assists: 8");
-        keyStatsOfAttackers.add("Diogo Jota No.20 Goals: 2 Assists: 7");
-        assertEquals(keyStatsOfAttackers, myTeam.keyStatsOfAttackers());
-    }
-
-    @Test
-    public void keyStatsOfMidfieldersTest() {
-        Player milner = new Player("James Milner",7,35, "MID");
-        milner.addGoals(2);
-        milner.addAssists(7);
-        milner.addPasses(120);
-        milner.addSuccessPasses(90);
-        milner.addInterceptions(5);
-        milner.addTacklesWon(0);
-        myTeam.addPlayer(milner);
-        ArrayList<String> keyStatsOfMidfielders = new ArrayList<>();
-        keyStatsOfMidfielders.add("Thiago Alcantara No.6 Passes: 300 Success Passes: 260 Passing Accuracy: 86");
-        keyStatsOfMidfielders.add("James Milner No.7 Passes: 120 Success Passes: 90 Passing Accuracy: 75");
-        assertEquals(keyStatsOfMidfielders, myTeam.keyStatsOfMidfielders());
-    }
-
-    @Test
-    public void keyStatsOfDefendersTest() {
-        Player robertson = new Player("Andy Robertson",26,27, "DEF");
-        robertson.addGoals(0);
-        robertson.addAssists(0);
-        robertson.addPasses(21);
-        robertson.addSuccessPasses(15);
-        robertson.addInterceptions(9);
-        robertson.addTacklesWon(2);
-        myTeam.addPlayer(robertson);
-        ArrayList<String> keyStatsOfDefenders = new ArrayList<>();
-        keyStatsOfDefenders.add("Joe Matip No.32 Interceptions: 19 Tackles Won: 8");
-        keyStatsOfDefenders.add("Andy Robertson No.26 Interceptions: 9 Tackles Won: 2");
-        assertEquals(keyStatsOfDefenders, myTeam.keyStatsOfDefenders());
     }
 
     @Test

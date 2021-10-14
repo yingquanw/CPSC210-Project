@@ -89,39 +89,6 @@ class PlayerTest {
         assertEquals(8, myPlayer.getTacklesWon());
     }
 
-    @Test
-    public void passingAccuracyNumeratorZeroTest() {
-        assertEquals(0, myPlayer.getPasses());
-        myPlayer.addPasses(1);
-        assertEquals(1, myPlayer.getPasses());
-        assertEquals(0, myPlayer.getSuccessPasses());
-        assertTrue(myPlayer.passingAccuracy() == 0);
-    }
-
-    @Test
-    public void passingAccuracyDenominatorZeroTest() {
-        assertEquals(0, myPlayer.getPasses());
-        assertEquals(0, myPlayer.getSuccessPasses());
-        myPlayer.addSuccessPasses(1);
-        assertEquals(1, myPlayer.getSuccessPasses());
-        assertTrue(myPlayer.passingAccuracy() == 0);
-    }
-
-    @Test
-    public void passingAccuracyAllZeroTest() {
-        assertEquals(0, myPlayer.getPasses());
-        assertEquals(0, myPlayer.getSuccessPasses());
-        assertEquals(0,myPlayer.passingAccuracy());
-    }
-
-    @Test
-    public void passingAccuracyNonZeroTest() {
-        myPlayer.addPasses(200);
-        myPlayer.addSuccessPasses(160);
-        assertEquals(200, myPlayer.getPasses());
-        assertEquals(160, myPlayer.getSuccessPasses());
-        assertEquals(80,myPlayer.passingAccuracy());
-    }
 
     @Test
     public  void statsSummaryTest() {
