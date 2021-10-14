@@ -42,7 +42,7 @@ public class MyHomeTeamApp {
     //MODIFIES: this
     //EFFECTS: returns the command that the user entered
     private String getInput() {
-        String command = null;
+        String command;
         input = new Scanner(System.in);
         input.useDelimiter("\n");
         command = input.next();
@@ -135,8 +135,6 @@ public class MyHomeTeamApp {
             System.out.println("Total interceptions: " + myTeam.getTotalInterceptions());
         } else if (command.equals("9")) {
             System.out.println("Total tackles won: " + myTeam.getTotalTacklesWon());
-        } else {
-            System.out.println();
         }
     }
 
@@ -198,8 +196,6 @@ public class MyHomeTeamApp {
             System.out.println("Interceptions: " + p.getInterceptions());
         } else if (command.equals("t")) {
             System.out.println("Tackles Won: " + p.getTacklesWon());
-        }  else {
-            System.out.println();
         }
     }
 
@@ -244,8 +240,6 @@ public class MyHomeTeamApp {
         } else if (stats.equals("t")) {
             p.addTacklesWon(amountInt);
             System.out.println("You have added " + amountInt + " tackles won to " + p.getName());
-        }  else {
-            System.out.println();
         }
     }
 
@@ -322,7 +316,6 @@ public class MyHomeTeamApp {
         } else {
             System.out.println("Failed to remove the player, because you do not have this player in your team.");
         }
-
     }
 
     //MODIFIES: this
