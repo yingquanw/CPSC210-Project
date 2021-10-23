@@ -28,5 +28,6 @@ knowledge I learned from this course.</p>
 - As a user, I want to be able to know all the players in the team, and also their detailed statistics.
 - As a user, I want to be able to check how many goals my team has scored.
 - As a user, I want to be able to know how many goals a player has scored.
-
+- As a user, I want to be able to save any changes I made to the team.
+- As a user, when I start the application, I want to be given the option to load my team from file.
    
