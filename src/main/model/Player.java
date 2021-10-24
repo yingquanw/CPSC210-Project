@@ -3,7 +3,10 @@ package model;
 // Represents a player having a name, number, age, position played, goal scored, assists, passes
 // success passes, interceptions, and number of tackles won.
 
-public class Player {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Player implements Writable {
     private String name;
     private int number;
     private int age;
@@ -16,17 +19,18 @@ public class Player {
     private int tacklesWon;
 
     //EFFECTS: creates a player with name, number, age, and position
-    public Player(String name, int number, int age, String position) {
+    public Player(String name, int number, int age, String position, int goals, int assists, int passes,
+                  int successPasses, int interceptions, int tacklesWon) {
         this.name = name;
         this.number = number;
         this.age = age;
         this.position = position;
-        this.goals = 0;
-        this.assists = 0;
-        this.passes = 0;
-        this.successPasses = 0;
-        this.interceptions = 0;
-        this.tacklesWon = 0;
+        this.goals = goals;
+        this.assists = assists;
+        this.passes = passes;
+        this.successPasses = successPasses;
+        this.interceptions = interceptions;
+        this.tacklesWon = tacklesWon;
     }
 
     //getter of player's name
@@ -126,6 +130,23 @@ public class Player {
         return name + " No." + number + " Age: " + age + " Position: " + position + " Goals: " + goals
                 + " Assists: " + assists + " Passes: " + passes + " Success passes: " + successPasses
                 + " Interceptions: " + interceptions + " Tackles Won: " + tacklesWon;
+    }
+
+    //EFFECTS: returns Json representation of a Player
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("number", number);
+        json.put("age", age);
+        json.put("position", position);
+        json.put("goals", goals);
+        json.put("assists", assists);
+        json.put("passes", passes);
+        json.put("successPasses", successPasses);
+        json.put("interceptions", interceptions);
+        json.put("tacklesWon", tacklesWon);
+        return json;
     }
 
 }

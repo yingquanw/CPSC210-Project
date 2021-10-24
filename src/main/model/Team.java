@@ -1,11 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a team having a name, a list of players with maximum size
 
-public class Team {
+public class Team implements Writable {
     public static final int MAX_SIZE = 20;
     private String name;
     private List<Player> players;
@@ -171,6 +175,26 @@ public class Team {
             totalTacklesWon = totalTacklesWon + next.getTacklesWon();
         }
         return totalTacklesWon;
+    }
+
+    //EFFECTS: returns Json representation of a Player
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("players", playersToJson());
+        return json;
+    }
+
+    // EFFECTS: returns players in the team as a JSON array
+    private JSONArray playersToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Player p : players) {
+            jsonArray.put(p.toJson());
+        }
+
+        return jsonArray;
     }
 
 }

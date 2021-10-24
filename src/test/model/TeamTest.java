@@ -19,14 +19,16 @@ public class TeamTest {
     @BeforeEach
     public void setUp() {
         myTeam = new Team("Liverpool");
-        Player salah = new Player("Mohamed Salah",11,29, "ATT");
+        Player salah = new Player("Mohamed Salah",11,29, "ATT",
+                0,0,0,0,0,0);
         salah.addGoals(12);
         salah.addAssists(8);
         salah.addPasses(120);
         salah.addSuccessPasses(90);
         salah.addInterceptions(5);
         myTeam.addPlayer(salah);
-        Player thiago = new Player("Thiago Alcantara",6,30, "MID");
+        Player thiago = new Player("Thiago Alcantara",6,30, "MID",
+                0,0,0,0,0,0);
         thiago.addGoals(3);
         thiago.addAssists(12);
         thiago.addPasses(300);
@@ -34,7 +36,8 @@ public class TeamTest {
         thiago.addInterceptions(7);
         thiago.addTacklesWon(2);
         myTeam.addPlayer(thiago);
-        Player matip = new Player("Joe Matip",32,27, "DEF");
+        Player matip = new Player("Joe Matip",32,27, "DEF",
+                0,0,0,0,0,0);
         matip.addAssists(1);
         matip.addPasses(210);
         matip.addSuccessPasses(74);
@@ -73,7 +76,8 @@ public class TeamTest {
     @Test
     public void addPlayerSuccessTest() {
         assertEquals(3, myTeam.numberOfPlayers());
-        Player mane = new Player("Sadio Mane",10,29, "ATT");
+        Player mane = new Player("Sadio Mane",10,29, "ATT",
+                0,0,0,0,0,0);
         assertTrue(myTeam.addPlayer(mane));
         assertEquals(4, myTeam.numberOfPlayers());
     }
@@ -81,7 +85,8 @@ public class TeamTest {
     @Test
     public void addPlayerRepeatNameTest() {
         assertEquals(3, myTeam.numberOfPlayers());
-        Player salahTwo = new Player("Mohamed Salah",2,21, "MID");
+        Player salahTwo = new Player("Mohamed Salah",2,21, "MID",
+                0,0,0,0,0,0);
         assertFalse(myTeam.addPlayer(salahTwo));
         assertEquals(3, myTeam.numberOfPlayers());
     }
@@ -89,7 +94,8 @@ public class TeamTest {
     @Test
     public void addPlayerRepeatNumberTest() {
         assertEquals(3, myTeam.numberOfPlayers());
-        Player henderson = new Player("John Henderson",6,25, "DEF");
+        Player henderson = new Player("John Henderson",6,25, "DEF",
+                0,0,0,0,0,0);
         assertFalse(myTeam.addPlayer(henderson));
         assertEquals(3, myTeam.numberOfPlayers());
     }
@@ -100,10 +106,12 @@ public class TeamTest {
         assertEquals(0, testTeam.numberOfPlayers());
         for (int i = 0; i < MAX_SIZE; i++) {
             String playerName = Integer.toString(i);
-            Player p = new Player(playerName,i,1,"ATT");
+            Player p = new Player(playerName,i,1,"ATT",
+                    0,0,0,0,0,0);
             testTeam.addPlayer(p);
         }
-        Player henderson = new Player("John Henderson",6,25, "DEF");
+        Player henderson = new Player("John Henderson",6,25, "DEF",
+                0,0,0,0,0,0);
         assertFalse(testTeam.addPlayer(henderson));
         assertEquals(20, testTeam.numberOfPlayers());
     }

@@ -2,6 +2,11 @@ package ui;
 
 import model.Player;
 import model.Team;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import static model.Team.MAX_SIZE;
@@ -12,9 +17,14 @@ public class MyHomeTeamApp {
     private Team myTeam;
     private Scanner input;
     private String command;
+    private static final String JSON_STORE = "./data/myTeam.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     //EFFECTS: runs My Home Team application
-    public MyHomeTeamApp() {
+    public MyHomeTeamApp() throws FileNotFoundException {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runTeam();
     }
 
@@ -30,6 +40,7 @@ public class MyHomeTeamApp {
             command = getInput();
 
             if (command.equals("q")) {
+                whetherToSaveBeforeQuitting();
                 keepGoing = false;
             } else {
                 processMainCommand(command);
@@ -57,6 +68,8 @@ public class MyHomeTeamApp {
         System.out.println("\tc -> Change Player Statistics");
         System.out.println("\td -> Add or Remove Player");
         System.out.println("\te -> Change Team Name");
+        System.out.println("\ts -> Save team to file");
+        System.out.println("\tl -> Load team from file");
         System.out.println("\tq -> quit");
     }
 
@@ -86,6 +99,10 @@ public class MyHomeTeamApp {
             addOrRemovePlayer();
         } else if (command.equals("e")) {
             changeTeamName();
+        } else if (command.equals("s")) {
+            saveTeam();
+        } else if (command.equals("l")) {
+            loadTeam();
         } else {
             System.out.println("Selection is invalid.");
         }
@@ -276,14 +293,25 @@ public class MyHomeTeamApp {
         System.out.println("Please Enter the name:");
         String name = getInput();
         System.out.println("Please Enter the number:");
-        String number = getInput();
-        int numberInt = Integer.parseInt(number);
+        int number = Integer.parseInt(getInput());
         System.out.println("Please Enter the age:");
-        String age = getInput();
-        int ageInt = Integer.parseInt(age);
+        int age = Integer.parseInt(getInput());
         System.out.println("Please Enter the position played:");
         String position = getInput();
-        Player newPlayer = new Player(name,numberInt,ageInt,position);
+        System.out.println("Please Enter goals:");
+        int goals = Integer.parseInt(getInput());
+        System.out.println("Please Enter assists:");
+        int assists = Integer.parseInt(getInput());
+        System.out.println("Please Enter passes:");
+        int passes = Integer.parseInt(getInput());
+        System.out.println("Please Enter success passes:");
+        int successPasses = Integer.parseInt(getInput());
+        System.out.println("Please Enter interceptions:");
+        int interceptions = Integer.parseInt(getInput());
+        System.out.println("Please Enter tackles won:");
+        int tacklesWon = Integer.parseInt(getInput());
+        Player newPlayer = new Player(name, number, age, position,
+                goals,assists,passes,successPasses,interceptions,tacklesWon);
         return newPlayer;
     }
 
@@ -327,9 +355,22 @@ public class MyHomeTeamApp {
         System.out.println("Successfully changed team name to " + myTeam.getName() + " Soccer Club.");
     }
 
+    //EFFECTS: ask users whether they want to save the changes they made before quitting,
+    //         if yes, save the team
+    private void whetherToSaveBeforeQuitting() {
+        System.out.println("You are now quitting:");
+        System.out.println("Press y to save the changes you made before quitting.");
+        System.out.println("Press any other key to quit without saving.");
+        command = getInput();
+        if (command.equals("y")) {
+            saveTeam();
+        }
+    }
+
     //EFFECTS: creates a default player in the team
     private Player createSalah() {
-        Player salah = new Player("Mohamed Salah",11,29, "ATT");
+        Player salah = new Player("Mohamed Salah",11,29, "ATT",
+                0,0,0,0,0,0);
         salah.addGoals(22);
         salah.addAssists(5);
         salah.addPasses(1263);
@@ -341,7 +382,8 @@ public class MyHomeTeamApp {
 
     //EFFECTS: creates a default player in the team
     private Player createMane() {
-        Player mane = new Player("Sadio Mane",10,29, "ATT");
+        Player mane = new Player("Sadio Mane",10,29, "ATT",
+                0,0,0,0,0,0);
         mane.addGoals(11);
         mane.addAssists(7);
         mane.addPasses(1006);
@@ -353,7 +395,8 @@ public class MyHomeTeamApp {
 
     //EFFECTS: creates a default player in the team
     private Player createJota() {
-        Player jota = new Player("Diogo Jota",20,24, "ATT");
+        Player jota = new Player("Diogo Jota",20,24, "ATT",
+                0,0,0,0,0,0);
         jota.addGoals(9);
         jota.addAssists(0);
         jota.addPasses(426);
@@ -365,7 +408,8 @@ public class MyHomeTeamApp {
 
     //EFFECTS: creates a default player in the team
     private Player createFabinho() {
-        Player fabinho = new Player("Fabinho Tavares",3,27, "MID");
+        Player fabinho = new Player("Fabinho Tavares",3,27, "MID",
+                0,0,0,0,0,0);
         fabinho.addGoals(0);
         fabinho.addAssists(0);
         fabinho.addPasses(2109);
@@ -377,7 +421,8 @@ public class MyHomeTeamApp {
 
     //EFFECTS: creates a default player in the team
     private Player createMilner() {
-        Player milner = new Player("James Milner",7,35, "MID");
+        Player milner = new Player("James Milner",7,35, "MID",
+                0,0,0,0,0,0);
         milner.addGoals(6);
         milner.addAssists(7);
         milner.addPasses(1465);
@@ -389,7 +434,8 @@ public class MyHomeTeamApp {
 
     //EFFECTS: creates a default player in the team
     private Player createVanDijk() {
-        Player vanDijk = new Player("Virgil Van Dijk",4,30, "DEF");
+        Player vanDijk = new Player("Virgil Van Dijk",4,30, "DEF",
+                0,0,0,0,0,0);
         vanDijk.addGoals(5);
         vanDijk.addAssists(1);
         vanDijk.addPasses(3253);
@@ -401,7 +447,8 @@ public class MyHomeTeamApp {
 
     //EFFECTS: creates a default player in the team
     private Player createMatip() {
-        Player matip = new Player("Joe Matip",32,27, "DEF");
+        Player matip = new Player("Joe Matip",32,27, "DEF",
+                0,0,0,0,0,0);
         matip.addGoals(1);
         matip.addAssists(2);
         matip.addPasses(2123);
@@ -409,6 +456,29 @@ public class MyHomeTeamApp {
         matip.addInterceptions(9);
         matip.addTacklesWon(18);
         return matip;
+    }
+
+    // EFFECTS: saves the team to file
+    private void saveTeam() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(myTeam);
+            jsonWriter.close();
+            System.out.println("Saved " + myTeam.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads team from file
+    private void loadTeam() {
+        try {
+            myTeam = jsonReader.read();
+            System.out.println("Loaded " + myTeam.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
 }

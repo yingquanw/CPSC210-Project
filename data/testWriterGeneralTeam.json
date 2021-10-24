@@ -1,0 +1,29 @@
+{
+    "players": [
+        {
+            "number": 10,
+            "passes": 1006,
+            "assists": 7,
+            "tacklesWon": 9,
+            "name": "Sadio Mane",
+            "successPasses": 801,
+            "position": "ATT",
+            "age": 29,
+            "interceptions": 23,
+            "goals": 11
+        },
+        {
+            "number": 32,
+            "passes": 2123,
+            "assists": 2,
+            "tacklesWon": 18,
+            "name": "Joe Matip",
+            "successPasses": 1892,
+            "position": "DEF",
+            "age": 27,
+            "interceptions": 9,
+            "goals": 1
+        }
+    ],
+    "name": "My team"
+}

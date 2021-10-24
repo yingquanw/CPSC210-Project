@@ -12,7 +12,8 @@ class PlayerTest {
 
     @BeforeEach
     public void setUp(){
-        myPlayer = new Player("Lionel Messi",30,34, "ATT");
+        myPlayer = new Player("Lionel Messi",30,34, "ATT",
+                0,0,0,0,0,0);
     }
 
     @Test

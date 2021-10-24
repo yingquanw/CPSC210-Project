@@ -1,0 +1,89 @@
+{
+    "players": [
+        {
+            "number": 11,
+            "passes": 1263,
+            "assists": 5,
+            "tacklesWon": 10,
+            "name": "Mohamed Salah",
+            "successPasses": 1060,
+            "position": "ATT",
+            "age": 29,
+            "interceptions": 18,
+            "goals": 22
+        },
+        {
+            "number": 10,
+            "passes": 1006,
+            "assists": 7,
+            "tacklesWon": 9,
+            "name": "Sadio Mane",
+            "successPasses": 801,
+            "position": "ATT",
+            "age": 29,
+            "interceptions": 23,
+            "goals": 11
+        },
+        {
+            "number": 20,
+            "passes": 426,
+            "assists": 0,
+            "tacklesWon": 4,
+            "name": "Diogo Jota",
+            "successPasses": 350,
+            "position": "ATT",
+            "age": 24,
+            "interceptions": 18,
+            "goals": 9
+        },
+        {
+            "number": 3,
+            "passes": 2109,
+            "assists": 0,
+            "tacklesWon": 42,
+            "name": "Fabinho Tavares",
+            "successPasses": 1982,
+            "position": "MID",
+            "age": 27,
+            "interceptions": 32,
+            "goals": 0
+        },
+        {
+            "number": 7,
+            "passes": 1465,
+            "assists": 7,
+            "tacklesWon": 11,
+            "name": "James Milner",
+            "successPasses": 1265,
+            "position": "MID",
+            "age": 35,
+            "interceptions": 17,
+            "goals": 6
+        },
+        {
+            "number": 4,
+            "passes": 3253,
+            "assists": 1,
+            "tacklesWon": 23,
+            "name": "Virgil Van Dijk",
+            "successPasses": 2852,
+            "position": "DEF",
+            "age": 30,
+            "interceptions": 10,
+            "goals": 5
+        },
+        {
+            "number": 32,
+            "passes": 2123,
+            "assists": 2,
+            "tacklesWon": 18,
+            "name": "Joe Matip",
+            "successPasses": 1892,
+            "position": "DEF",
+            "age": 27,
+            "interceptions": 9,
+            "goals": 1
+        }
+    ],
+    "name": "Liverpool"
+}
