@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import org.json.*;
 
+// Reference from CPSC210 JsonSerializationDemo https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 // Represents a reader that reads team from JSON data stored in file locates at data folder
 
 public class JsonReader {

@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 
+// Reference from CPSC210 JsonSerializationDemo https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 // Represents a writer that writes JSON representation of team to file locates in data folder
 
 public class JsonWriter {

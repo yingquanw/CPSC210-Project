@@ -4,6 +4,7 @@ import model.Player;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// Reference from CPSC210 JsonSerializationDemo https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 // Test class for checking a player
 
 public class JsonTest {
