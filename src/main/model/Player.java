@@ -149,4 +149,9 @@ public class Player implements Writable {
         return json;
     }
 
+    @Override
+    public String toString() {
+        String name = this.name;
+        return name;
+    }
 }
