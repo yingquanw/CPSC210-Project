@@ -7,6 +7,7 @@ import persistence.Writable;
 import java.util.ArrayList;
 import java.util.List;
 
+
 // Represents a team having a name, a list of players with maximum size
 
 public class Team implements Writable {
