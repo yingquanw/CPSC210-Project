@@ -83,30 +83,6 @@
             "age": 27,
             "interceptions": 9,
             "goals": 1
-        },
-        {
-            "number": 26,
-            "passes": 2679,
-            "assists": 7,
-            "tacklesWon": 13,
-            "name": "Andy Robertson",
-            "successPasses": 2198,
-            "position": "DEF",
-            "age": 27,
-            "interceptions": 14,
-            "goals": 1
-        },
-        {
-            "number": 21,
-            "passes": 1264,
-            "assists": 20,
-            "tacklesWon": 3,
-            "name": "Bill Wang",
-            "successPasses": 1000,
-            "position": "ATT",
-            "age": 19,
-            "interceptions": 12,
-            "goals": 19
         }
     ],
     "name": "Liverpool"

@@ -11,6 +11,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static ui.MyHomeTeamGUI.FRAME_WIDTH;
@@ -27,6 +28,7 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
     DefaultListModel<Player> playerListModel;
     JScrollPane playerListScrollPanel;
     JButton removeButton;
+    JLabel playerStats;
     Team myTeam;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
@@ -43,6 +45,7 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
         newContentPane.setPreferredSize(new Dimension(PlayerPanel_WIDTH,PlayerPanel_HEIGHT / 2));
         add(newContentPane);
         addRemoveButton();
+        addPlayerStats();
     }
 
     public JLabel createLabel() {
@@ -90,19 +93,65 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
         return playerListScrollPanel;
     }
 
+//    public void addPlayerStats() {
+//        playerStats = new JLabel();
+//        int index = playerList.getSelectedIndex();
+//        Player p = myTeam.allPlayers().get(index);
+//        String playerInfo = p.statsSummary();
+//        playerStats.setText(playerInfo);
+//        playerStats.setBounds(100, 450, 250, 150);
+//        this.add(playerStats);
+//    }
+
+    public void addPlayerStats() {
+        playerStats = new JLabel();
+        int index = playerList.getSelectedIndex();
+        Player p = myTeam.allPlayers().get(index);
+        //String playerInfo = p.statsSummary();
+        playerStats.setText("<html>" + p.getName() + "<br>" + p.getNumber() + "<br>" + p.getPosition()
+                + "<br>" + p.getGoals() + "<br>" + p.getAssists() + "<br>" + p.getPasses() + "<br>"
+                + p.getSuccessPasses() + "<br>" + p.getInterceptions() + "<br>" + p.getTacklesWon() + "</html>");
+        playerStats.setPreferredSize(new Dimension(200,150));
+        playerStats.setBounds(150, 450, 250, 150);
+        this.add(playerStats);
+    }
+
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting() == false) {
 
             if (playerList.getSelectedIndex() == -1) {
-                //No selection, disable fire button.
-                //fireButton.setEnabled(false);
+                removeButton.setEnabled(false);
 
             } else {
-                //Selection, enable the fire button.
-                //fireButton.setEnabled(true);
+                removeButton.setEnabled(true);
             }
+            updatePlayerStats();
+
         }
+        //updatePlayerStats();
+
+    }
+
+    public void updatePlayerStats() {
+        int index = playerList.getSelectedIndex();
+        if (playerList.getSelectedIndex() != -1) {
+            Player p = myTeam.allPlayers().get(index);
+            playerStats.setText("<html>" + p.getName() + "<br>" + p.getNumber() + "<br>" + p.getPosition()
+                    + "<br>" + p.getGoals() + "<br>" + p.getAssists() + "<br>" + p.getPasses() + "<br>"
+                    + p.getSuccessPasses() + "<br>" + p.getInterceptions() + "<br>" + p.getTacklesWon() + "</html>");
+        } else {
+            playerStats.setText("");
+        }
+        playerStats.setPreferredSize(new Dimension(200,150));
+        //playerStats.setBounds(100, 450, 250, 150);
+        this.add(playerStats);
+//        Player p = myTeam.allPlayers().get(index);
+//        String playerInfo = p.statsSummary();
+//        playerStats.setText(playerInfo);
+//        playerStats.setPreferredSize(new Dimension(250,150));
+//        //playerStats.setBounds(100, 450, 250, 150);
+//        this.add(playerStats);
 
     }
 
@@ -111,6 +160,7 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
         int index = playerList.getSelectedIndex();
         myTeam.allPlayers().remove(index);
         playerListModel.remove(index);
+        //saveTeam();
         int size = playerListModel.getSize();
         if (size == 0) {
             removeButton.setEnabled(false);
@@ -118,6 +168,26 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
         playerList.setSelectedIndex(index);
         playerList.ensureIndexIsVisible(index);
 
+    }
+
+    // EFFECTS: saves the team to file
+    private void saveTeam() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(myTeam);
+            jsonWriter.close();
+            //System.out.println("Saved " + myTeam.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            //System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    public Team getTeam() {
+        return myTeam;
+    }
+
+    public JList<Player> getPlayerList() {
+        return playerList;
     }
 
 }
