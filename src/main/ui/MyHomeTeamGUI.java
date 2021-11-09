@@ -9,6 +9,10 @@ public class MyHomeTeamGUI extends JFrame {
     public static final int FRAME_WIDTH = 600;
     public static final int FRAME_HEIGHT = 600;
 
+    private PlayerPanel pp;
+    private ManagerPanel mp;
+    private Team myTeam;
+
 
     public MyHomeTeamGUI() {
 
@@ -17,8 +21,11 @@ public class MyHomeTeamGUI extends JFrame {
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         getContentPane().setBackground(Color.BLUE);
         setLayout(null);
-        add(new PlayerPanel());
-        add(new ManagerPanel());
+        myTeam = new Team("Liverpool");
+        pp = new PlayerPanel();
+        mp = new ManagerPanel(pp);
+        add(pp);
+        add(mp);
         setVisible(true);
 
 
@@ -28,4 +35,6 @@ public class MyHomeTeamGUI extends JFrame {
         MyHomeTeamGUI myHomeTeam = new MyHomeTeamGUI();
 
     }
+
+
 }

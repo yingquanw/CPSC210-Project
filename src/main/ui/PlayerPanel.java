@@ -28,7 +28,11 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
     DefaultListModel<Player> playerListModel;
     JScrollPane playerListScrollPanel;
     JButton removeButton;
+    JButton loadButton;
+    JButton saveButton;
+    JLabel saveLabel;
     JLabel playerStats;
+
     Team myTeam;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
@@ -36,31 +40,69 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
     public PlayerPanel() {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
+        this.myTeam = new Team("Liverpool");
+        //myTeam = loadTeam();
         setBackground(Color.LIGHT_GRAY);
         setBounds(0,0,PlayerPanel_WIDTH, PlayerPanel_HEIGHT);
+        addLoadButton();
+        addSaveButton();
+        addSaveLabel();
         add(createLabel());
         //createPlayerList();
-        JComponent newContentPane = createPlayerList();
-        newContentPane.setOpaque(true); //content panes must be opaque
-        newContentPane.setPreferredSize(new Dimension(PlayerPanel_WIDTH,PlayerPanel_HEIGHT / 2));
-        add(newContentPane);
+        addPlayerListScrollPanel();
         addRemoveButton();
         addPlayerStats();
+
+    }
+
+    private void addPlayerListScrollPanel() {
+        JComponent newContentPane = createPlayerList();
+        newContentPane.setOpaque(true); //content panes must be opaque
+        newContentPane.setPreferredSize(new Dimension(PlayerPanel_WIDTH, PlayerPanel_HEIGHT / 2));
+        add(newContentPane);
     }
 
     public JLabel createLabel() {
         label = new JLabel();
-        label.setText("Player List");
+        label.setText("               Player List                ");
         return label;
+    }
+
+    public void addSaveLabel() {
+        saveLabel = new JLabel();
+        saveLabel.setText("Saved!");
+        add(saveLabel);
+        saveLabel.setVisible(false);
     }
 
     public DefaultListModel createModel() {
         playerListModel = new DefaultListModel<>();
-        myTeam = loadTeam();
+        //myTeam = loadTeam();
         for (Player next : myTeam.allPlayers()) {
             playerListModel.addElement(next);
         }
         return playerListModel;
+    }
+
+    public void updateModel(Player p) {
+        playerListModel.addElement(p);
+        int index = playerList.getSelectedIndex();
+        if (index == -1) {
+            playerList.setSelectedIndex(0);
+            //addPlayerStats();
+        }
+        playerList.updateUI();
+    }
+
+    public void updateModel() {
+        for (Player next : myTeam.allPlayers()) {
+            playerListModel.addElement(next);
+        }
+        if (myTeam.allPlayers() != null) {
+            playerList.setSelectedIndex(0);
+        }
+        updatePlayerStats();
+        playerList.updateUI();
     }
 
     public void addRemoveButton() {
@@ -69,6 +111,22 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
         removeButton.addActionListener(this);
         removeButton.setText("Remove");
         this.add(removeButton);
+    }
+
+    public void addLoadButton() {
+        loadButton = new JButton();
+        loadButton.setBounds(50, 20, 30, 20);
+        loadButton.addActionListener(this);
+        loadButton.setText("Load");
+        this.add(loadButton);
+    }
+
+    public void addSaveButton() {
+        saveButton = new JButton();
+        saveButton.setBounds(100, 20, 30, 20);
+        saveButton.addActionListener(this);
+        saveButton.setText("Save");
+        this.add(saveButton);
     }
 
 
@@ -106,14 +164,16 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
     public void addPlayerStats() {
         playerStats = new JLabel();
         int index = playerList.getSelectedIndex();
-        Player p = myTeam.allPlayers().get(index);
-        //String playerInfo = p.statsSummary();
-        playerStats.setText("<html>" + p.getName() + "<br>" + p.getNumber() + "<br>" + p.getPosition()
-                + "<br>" + p.getGoals() + "<br>" + p.getAssists() + "<br>" + p.getPasses() + "<br>"
-                + p.getSuccessPasses() + "<br>" + p.getInterceptions() + "<br>" + p.getTacklesWon() + "</html>");
-        playerStats.setPreferredSize(new Dimension(200,150));
-        playerStats.setBounds(150, 450, 250, 150);
-        this.add(playerStats);
+        if (index != -1) {
+            Player p = myTeam.allPlayers().get(index);
+            //String playerInfo = p.statsSummary();
+            playerStats.setText("<html>" + p.getName() + "<br>" + p.getNumber() + "<br>" + p.getPosition()
+                    + "<br>" + p.getGoals() + "<br>" + p.getAssists() + "<br>" + p.getPasses() + "<br>"
+                    + p.getSuccessPasses() + "<br>" + p.getInterceptions() + "<br>" + p.getTacklesWon() + "</html>");
+            playerStats.setPreferredSize(new Dimension(200,150));
+            playerStats.setBounds(150, 450, 250, 150);
+            this.add(playerStats);
+        }
     }
 
     @Override
@@ -146,6 +206,7 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
         playerStats.setPreferredSize(new Dimension(200,150));
         //playerStats.setBounds(100, 450, 250, 150);
         this.add(playerStats);
+
 //        Player p = myTeam.allPlayers().get(index);
 //        String playerInfo = p.statsSummary();
 //        playerStats.setText(playerInfo);
@@ -157,16 +218,27 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int index = playerList.getSelectedIndex();
-        myTeam.allPlayers().remove(index);
-        playerListModel.remove(index);
-        //saveTeam();
-        int size = playerListModel.getSize();
-        if (size == 0) {
-            removeButton.setEnabled(false);
+        if (e.getSource() == removeButton) {
+            int index = playerList.getSelectedIndex();
+            myTeam.allPlayers().remove(index);
+            playerListModel.remove(index);
+            //saveTeam();
+            int size = playerListModel.getSize();
+            if (size == 0) {
+                removeButton.setEnabled(false);
+            }
+            playerList.setSelectedIndex(index);
+            playerList.ensureIndexIsVisible(index);
         }
-        playerList.setSelectedIndex(index);
-        playerList.ensureIndexIsVisible(index);
+        if (e.getSource() == loadButton) {
+            myTeam = loadTeam();
+            updateModel();
+            //playerList.updateUI();
+        }
+        if (e.getSource() == saveButton) {
+            saveTeam();
+            saveLabel.setVisible(true);
+        }
 
     }
 
