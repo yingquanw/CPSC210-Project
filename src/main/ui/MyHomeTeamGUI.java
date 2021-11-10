@@ -19,6 +19,8 @@ public class MyHomeTeamGUI extends JFrame {
         setTitle("My Home Team");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        setLocationRelativeTo(null);
+        setResizable(false);
         getContentPane().setBackground(Color.BLUE);
         setLayout(null);
         myTeam = new Team("Liverpool");

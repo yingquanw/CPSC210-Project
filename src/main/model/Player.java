@@ -125,6 +125,13 @@ public class Player implements Writable {
         tacklesWon = tacklesWon + t;
     }
 
+    //EFFECTS: toString() Method of Player class, returns the name of the player
+    @Override
+    public String toString() {
+        String name = this.name;
+        return name;
+    }
+
     //EFFECTS: returns a string of statistics summary of the player
     public String statsSummary() {
         return name + " No." + number + " Age: " + age + " Position: " + position + " Goals: " + goals
@@ -149,9 +156,4 @@ public class Player implements Writable {
         return json;
     }
 
-    @Override
-    public String toString() {
-        String name = this.name;
-        return name;
-    }
 }

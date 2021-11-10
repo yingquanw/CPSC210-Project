@@ -13,6 +13,6 @@ public class PlayerTextField extends JTextField {
 
     public PlayerTextField() {
         textLabel = new JLabel();
-        setPreferredSize(new Dimension(ManagerPanel_WIDTH - 150, 20));
+        setPreferredSize(new Dimension(ManagerPanel_WIDTH - 150, 29));
     }
 }

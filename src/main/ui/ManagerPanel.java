@@ -15,7 +15,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
     public static final int ManagerPanel_WIDTH = FRAME_WIDTH / 2;
     public static final int ManagerPanel_HEIGHT = FRAME_HEIGHT;
 
-    JLabel label;
+    JLabel greeting;
     JTextField name;
     JTextField number;
     JTextField age;
@@ -26,10 +26,12 @@ public class ManagerPanel extends JPanel implements ActionListener {
     JTextField successPasses;
     JTextField interceptions;
     JTextField tacklesWon;
+    JTextField newTeamName;
     JButton addButton;
     JLabel textLabel;
-    //private Team myTeam;
+    JButton changeNameButton;
     JLabel playerFeedbackLabel;
+    String teamName;
     private PlayerPanel playerPanel;
 
 
@@ -40,7 +42,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
         setBackground(Color.ORANGE);
         //setPreferredSize(new Dimension(PlayerPanel_WIDTH,PlayerPanel_HEIGHT));
         setBounds(FRAME_WIDTH / 2,0, ManagerPanel_WIDTH, ManagerPanel_HEIGHT);
-        add(createLabel());
+        addGreetingLabel();
         enterName();
         enterNumber();
         enterAge();
@@ -53,19 +55,32 @@ public class ManagerPanel extends JPanel implements ActionListener {
         enterTacklesWon();
         addAddButton();
         addPlayerFeedbackLabel();
+        enterTeamName();
+        addChangeNameButton();
     }
 
-    public JLabel createLabel() {
-        label = new JLabel();
-        label.setText("                      Manager List                   ");
-        //label.setBounds(ManagerPanel_WIDTH, 0, ManagerPanel_WIDTH, 10);
-        return label;
+    public void addGreetingLabel() {
+        greeting = new JLabel();
+        teamName = playerPanel.getTeam().getName();
+        greeting.setText("Welcome to " + teamName + " Football Club:");
+        greeting.setFont(new Font("Verdana", Font.PLAIN, 15));
+        add(greeting);
     }
 
     public void addPlayerFeedbackLabel() {
         playerFeedbackLabel = new JLabel();
-        playerFeedbackLabel.setBounds(ManagerPanel_WIDTH + 100,450, 30, 20);
+        //playerFeedbackLabel.setBounds(ManagerPanel_WIDTH + 100,450, 30, 20);
+        playerFeedbackLabel.setPreferredSize(new Dimension(250, 20));
         this.add(playerFeedbackLabel);
+    }
+
+    public void addChangeNameButton() {
+        changeNameButton = new JButton();
+        changeNameButton.setBounds(ManagerPanel_WIDTH + 100,400, 30, 20);
+        changeNameButton.setLocation(ManagerPanel_WIDTH + 100, 500);
+        changeNameButton.addActionListener(this);
+        changeNameButton.setText("Change");
+        this.add(changeNameButton);
     }
 
     public void addAddButton() {
@@ -157,18 +172,33 @@ public class ManagerPanel extends JPanel implements ActionListener {
         add(tacklesWon);
     }
 
+    public void enterTeamName() {
+        newTeamName = new JTextField();
+        newTeamName.setPreferredSize(new Dimension(ManagerPanel_WIDTH - 150, 28));
+        textLabel = new JLabel("Enter new team name:       ");
+        textLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+        add(textLabel);
+        add(newTeamName);
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Player newPlayer = createNewPlayer();
-        if (playerPanel.getTeam().addPlayer(newPlayer)) {
-            playerFeedbackLabel.setText("Successfully added " + newPlayer.getName() + " to the team.");
-            playerPanel.updateModel(newPlayer);
-            //playerPanel.addPlayerStats();
+        if (e.getSource() == addButton) {
+            Player newPlayer = createNewPlayer();
+            if (playerPanel.getTeam().addPlayer(newPlayer)) {
+                playerFeedbackLabel.setText("Successfully added " + newPlayer.getName() + " to the team.");
+                playerPanel.updateModel(newPlayer);
 
-        } else {
-            playerFeedbackLabel.setText("<html>Unable to add new player:                              "
-                    + "<br> name and number are not unique.</html>");
+            } else {
+                playerFeedbackLabel.setText("<html>Unable to add new player:                              "
+                        + "<br> name and number are not unique.</html>");
+            }
+        }
+        if (e.getSource() == changeNameButton) {
+            teamName = newTeamName.getText();
+            playerPanel.getTeam().changeName(teamName);
+            greeting.setText("Welcome to " + teamName + " Football Club:");
         }
     }
 

@@ -90,6 +90,10 @@ class PlayerTest {
         assertEquals(8, myPlayer.getTacklesWon());
     }
 
+    @Test
+    public void toStringTest() {
+        assertEquals("Lionel Messi", myPlayer.toString());
+    }
 
     @Test
     public  void statsSummaryTest() {

@@ -65,6 +65,7 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
     public JLabel createLabel() {
         label = new JLabel();
         label.setText("               Player List                ");
+        label.setFont(new Font(label.getName(), Font.PLAIN, 15));
         return label;
     }
 
@@ -102,7 +103,16 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
             playerList.setSelectedIndex(0);
         }
         updatePlayerStats();
-        playerList.updateUI();
+        Player p = myTeam.allPlayers().get(0);
+        //String playerInfo = p.statsSummary();
+        playerStats.setText("<html>" + p.getName() + "<br>" + "No." + p.getNumber() + "<br>"
+                + "Pos: " + p.getPosition() + "<br>" + "G: " + p.getGoals() + "<br>" + "A: " + p.getAssists()
+                + "<br>" + "P: " + p.getPasses() + "<br>" + "SP: " + p.getSuccessPasses() + "<br>"
+                + "I: " + p.getInterceptions() + "<br>" + "TW: " + p.getTacklesWon() + "</html>");
+        playerStats.setPreferredSize(new Dimension(150,150));
+        playerStats.setBounds(50, 400, 250, 150);
+
+        //playerList.updateUI();
     }
 
     public void addRemoveButton() {
@@ -144,6 +154,7 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
     public JScrollPane createPlayerList() {
         playerList = new JList(createModel());
         playerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        playerList.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
         playerList.setSelectedIndex(0);
         playerList.addListSelectionListener(this);
         playerList.setVisibleRowCount(15);
@@ -167,12 +178,13 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
         if (index != -1) {
             Player p = myTeam.allPlayers().get(index);
             //String playerInfo = p.statsSummary();
-            playerStats.setText("<html>" + p.getName() + "<br>" + p.getNumber() + "<br>" + p.getPosition()
-                    + "<br>" + p.getGoals() + "<br>" + p.getAssists() + "<br>" + p.getPasses() + "<br>"
-                    + p.getSuccessPasses() + "<br>" + p.getInterceptions() + "<br>" + p.getTacklesWon() + "</html>");
+            playerStats.setText("<html>" + p.getName() + "<br>" + "No." + p.getNumber() + "<br>"
+                    + "Pos: " + p.getPosition() + "<br>" + "G: " + p.getGoals() + "<br>" + "A: " + p.getAssists()
+                    + "<br>" + "P: " + p.getPasses() + "<br>" + "SP: " + p.getSuccessPasses() + "<br>"
+                    + "I: " + p.getInterceptions() + "<br>" + "TW: " + p.getTacklesWon() + "</html>");
             playerStats.setPreferredSize(new Dimension(200,150));
             playerStats.setBounds(150, 450, 250, 150);
-            this.add(playerStats);
+            add(playerStats);
         }
     }
 
@@ -189,7 +201,6 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
             updatePlayerStats();
 
         }
-        //updatePlayerStats();
 
     }
 
@@ -197,14 +208,14 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
         int index = playerList.getSelectedIndex();
         if (playerList.getSelectedIndex() != -1) {
             Player p = myTeam.allPlayers().get(index);
-            playerStats.setText("<html>" + p.getName() + "<br>" + p.getNumber() + "<br>" + p.getPosition()
-                    + "<br>" + p.getGoals() + "<br>" + p.getAssists() + "<br>" + p.getPasses() + "<br>"
-                    + p.getSuccessPasses() + "<br>" + p.getInterceptions() + "<br>" + p.getTacklesWon() + "</html>");
+            playerStats.setText("<html>" + p.getName() + "<br>" + "No." + p.getNumber() + "<br>"
+                    + "Pos: " + p.getPosition() + "<br>" + "G: " + p.getGoals() + "<br>" + "A: " + p.getAssists()
+                    + "<br>" + "P: " + p.getPasses() + "<br>" + "SP: " + p.getSuccessPasses() + "<br>"
+                    + "I: " + p.getInterceptions() + "<br>" + "TW: " + p.getTacklesWon() + "</html>");
         } else {
             playerStats.setText("");
         }
         playerStats.setPreferredSize(new Dimension(200,150));
-        //playerStats.setBounds(100, 450, 250, 150);
         this.add(playerStats);
 
 //        Player p = myTeam.allPlayers().get(index);
