@@ -1,10 +1,7 @@
 package ui;
 
 import javax.swing.*;
-
 import java.awt.*;
-
-import static ui.ManagerPanel.ManagerPanel_HEIGHT;
 import static ui.ManagerPanel.ManagerPanel_WIDTH;
 
 public class PlayerTextField extends JTextField {
