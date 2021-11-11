@@ -56,12 +56,12 @@ public class TeamTest {
 
 
     @Test
-    public void allPlayersTest() {
+    public void getPlayersTest() {
         List<Player> playerList = new ArrayList<>();
         playerList.add(myTeam.getPlayer("Mohamed Salah"));
         playerList.add(myTeam.getPlayer("Thiago Alcantara"));
         playerList.add(myTeam.getPlayer("Joe Matip"));
-        assertEquals(playerList, myTeam.allPlayers());
+        assertEquals(playerList, myTeam.getPlayers());
     }
 
     @Test

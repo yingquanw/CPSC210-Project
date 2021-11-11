@@ -33,7 +33,7 @@ public class Team implements Writable {
     }
 
     //EFFECTS: returns the list of all players in the team
-    public List<Player> allPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 

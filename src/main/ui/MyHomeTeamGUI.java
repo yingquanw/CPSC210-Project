@@ -1,10 +1,9 @@
 package ui;
 
-import model.Team;
-
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
+
+// My Home Team application graphic user interface
 
 public class MyHomeTeamGUI extends JFrame {
 
@@ -13,7 +12,10 @@ public class MyHomeTeamGUI extends JFrame {
     private PlayerPanel pp;
     private ManagerPanel mp;
 
-    public MyHomeTeamGUI() throws FileNotFoundException {
+    //MODIFIES: this
+    //EFFECTS: creates the frame and adds panels to it
+    //         runs the application
+    public MyHomeTeamGUI() {
         setTitle("My Home Team");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -26,5 +28,9 @@ public class MyHomeTeamGUI extends JFrame {
         add(pp);
         add(mp);
         setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new MyHomeTeamGUI();
     }
 }
