@@ -178,14 +178,19 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
     }
 
     //MODIFIES: this
-    //EFFECTS: updates player statistics when a different player is selected
+    //EFFECTS: updates player statistics when a different player is selected,
+    //         clear all the text in the playerStats label if no player is selected
     private void updatePlayerStats() {
         int index = playerList.getSelectedIndex();
-        Player p = myTeam.getPlayers().get(index);
-        playerStats.setText("<html>" + p.getName() + "<br>" + "No." + p.getNumber() + "<br>"
-                + "Pos: " + p.getPosition() + "<br>" + "G: " + p.getGoals() + "<br>" + "A: " + p.getAssists()
-                + "<br>" + "P: " + p.getPasses() + "<br>" + "SP: " + p.getSuccessPasses() + "<br>"
-                + "I: " + p.getInterceptions() + "<br>" + "TW: " + p.getTacklesWon() + "</html>");
+        if (index != -1) {
+            Player p = myTeam.getPlayers().get(index);
+            playerStats.setText("<html>" + p.getName() + "<br>" + "No." + p.getNumber() + "<br>"
+                        + "Pos: " + p.getPosition() + "<br>" + "G: " + p.getGoals() + "<br>" + "A: " + p.getAssists()
+                        + "<br>" + "P: " + p.getPasses() + "<br>" + "SP: " + p.getSuccessPasses() + "<br>"
+                        + "I: " + p.getInterceptions() + "<br>" + "TW: " + p.getTacklesWon() + "</html>");
+        } else {
+            playerStats.setText("");
+        }
         playerStats.setPreferredSize(new Dimension(200,150));
         add(playerStats);
     }
@@ -256,12 +261,14 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
     private void removePlayer() {
         int index = playerList.getSelectedIndex();
         myTeam.getPlayers().remove(index);
+        if (playerListModel.getSize() > 1) {
+            playerList.setSelectedIndex(index - 1);
+        }
         playerListModel.remove(index);
         int size = playerListModel.getSize();
         if (size == 0) {
             removeButton.setEnabled(false);
         }
-        playerList.setSelectedIndex(index);
         playerList.ensureIndexIsVisible(index);
     }
 
