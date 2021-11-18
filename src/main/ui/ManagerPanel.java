@@ -214,11 +214,12 @@ public class ManagerPanel extends JPanel implements ActionListener {
     }
 
     //MODIFIES: this
-    //EFFECTS: prints text on panel to notify the user the new name of the team
-    private void addTeamNameChangedLabel() {
+    //EFFECTS: prints text on panel to notify the user both old and new name of the team
+    private void addTeamNameChangedLabel(String oldTeamName) {
         teamNameChanged = new JLabel();
-        teamName = playerPanel.getTeam().getName();
-        teamNameChanged.setText("Team name changed to: " + teamName);
+        String newTeamName = playerPanel.getTeam().getName();
+        teamNameChanged.setText("<html>Old Team name: " + oldTeamName + "<br> New Team name: "
+                + newTeamName + "</html>");
         add(teamNameChanged);
     }
 
@@ -250,7 +251,8 @@ public class ManagerPanel extends JPanel implements ActionListener {
     private void addPlayer() {
         Player newPlayer = createNewPlayer();
         if (playerPanel.getTeam().addPlayer(newPlayer)) {
-            playerFeedbackLabel.setText("Successfully added " + newPlayer.getName() + " to the team.");
+            playerFeedbackLabel.setText("<html>Successfully added " + newPlayer.getName()
+                    + "<br> to the team.</html>");
             playerPanel.updateModel(newPlayer);
 
         } else {
@@ -261,9 +263,10 @@ public class ManagerPanel extends JPanel implements ActionListener {
 
     //EFFECTS: changes the name of the team
     private void changeTeamName() {
+        String oldTeamName = playerPanel.getTeam().getName();
         teamName = newTeamName.getText();
         playerPanel.getTeam().changeName(teamName);
-        addTeamNameChangedLabel();
+        addTeamNameChangedLabel(oldTeamName);
         revalidate();
         repaint();
     }

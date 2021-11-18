@@ -190,11 +190,9 @@ public class Team implements Writable {
     // EFFECTS: returns players in the team as a JSON array
     private JSONArray playersToJson() {
         JSONArray jsonArray = new JSONArray();
-
         for (Player p : players) {
             jsonArray.put(p.toJson());
         }
-
         return jsonArray;
     }
 
