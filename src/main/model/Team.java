@@ -27,9 +27,10 @@ public class Team implements Writable {
     }
 
     //MODIFIES: this
-    //EFFECTS: changes the name of the team
+    //EFFECTS: changes the name of the team and adds to the EventLog
     public void changeName(String name) {
         this.name = name;
+        EventLog.getInstance().logEvent(new Event("Change team name to " + name + " FC"));
     }
 
     //EFFECTS: returns the list of all players in the team

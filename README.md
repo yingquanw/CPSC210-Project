@@ -41,5 +41,19 @@ When you remove a player from the team: <br/>
 *Mon Nov 22 20:42:30 PST 2021 <br/>
 Remove James Milner from Liverpool FC*
 
+When you change the team name: <br/>
+*Tue Nov 23 11:24:36 PST 2021 <br/>
+Change team name to Mancity FC*
+
+#Phase 4: Task 3
+In this program, the PlayerPanel class is associated with Team class, because it needs to know 
+the players in the team. My ManagerPanel class also needs to know the players in the team, 
+so that is why I established the association relationship between ManagerPanel and PlayerPanel 
+to make ManagerPanel knows the team we are using. However, this relationship can be simplified 
+by creating the team in MyHomeTeamGUI class, which contains PlayerPanel and ManagerPanel, and 
+pass this team a parameter when we instantiate the PlayerPanel and the ManagerPanel. Thus, we only 
+need to associate MyHomeTeamGUI to Team, we don't to associate PlayerPanel with Team and ManagerPanel 
+with PlayerPanel.
+
 
    
