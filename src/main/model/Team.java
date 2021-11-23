@@ -59,10 +59,12 @@ public class Team implements Writable {
     //EFFECTS: if the total number of players < MAX_SIZE, no player in the team had the same
     //         name or had same number with this new player
     //         returns true and adds a player, otherwise returns false
+    //         adds to the EventLog
     public boolean addPlayer(Player p) {
         if (players.size() < MAX_SIZE) {
             if (!containsPlayerName(p.getName()) && !containsPlayerNumber(p.getNumber())) {
                 players.add(p);
+                EventLog.getInstance().logEvent(new Event("Add " + p.getName() + " to " + name + " FC"));
                 return true;
             }
         }
@@ -71,11 +73,12 @@ public class Team implements Writable {
 
     //MODIFIES: this
     //EFFECTS: if the player is in the team, removes it and returns true,
-    //         otherwise returns false
+    //         otherwise returns false, adds to the EventLog
     public boolean removePlayer(String name) {
         for (Player next : players) {
             if (name.equals(next.getName())) {
                 players.remove(next);
+                EventLog.getInstance().logEvent(new Event("Remove " + name + " from " + this.name + " FC"));
                 return true;
             }
         }

@@ -260,7 +260,8 @@ public class PlayerPanel extends JPanel implements ListSelectionListener, Action
     //         if there is no player in the team, disables the remove button
     private void removePlayer() {
         int index = playerList.getSelectedIndex();
-        myTeam.getPlayers().remove(index);
+        String playerName = myTeam.getPlayers().get(index).getName();
+        myTeam.removePlayer(playerName);
         if (playerListModel.getSize() > 1) {
             playerList.setSelectedIndex(index - 1);
         }

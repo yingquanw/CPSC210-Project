@@ -100,8 +100,6 @@ class PlayerTest {
         assertEquals( "Lionel Messi No.30 Age: 34 Position: ATT Goals: 0 Assists: 0 Passes: 0 " +
                 "Success passes: 0 Interceptions: 0 Tackles Won: 0", myPlayer.statsSummary());
     }
-
-
 }
 
 

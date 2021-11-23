@@ -32,4 +32,14 @@ knowledge I learned from this course.</p>
 - As a user, I want the application to ask me whether to save the changes before I quit
   and I can choose to save or do not save.
 
+#Phase 4: Task 2
+When you add a player to the team: <br/>
+*Mon Nov 22 20:39:54 PST 2021 <br/>
+Add Mohamed Salah to Liverpool FC*
+
+When you remove a player from the team: <br/>
+*Mon Nov 22 20:42:30 PST 2021 <br/>
+Remove James Milner from Liverpool FC*
+
+
    

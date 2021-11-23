@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.Player;
 import model.Team;
 import persistence.JsonReader;
@@ -41,6 +43,7 @@ public class MyHomeTeamApp {
 
             if (command.equals("q")) {
                 whetherToSaveBeforeQuitting();
+                printLog();
                 keepGoing = false;
             } else {
                 processMainCommand(command);
@@ -478,6 +481,13 @@ public class MyHomeTeamApp {
             System.out.println("Loaded " + myTeam.getName() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    //EFFECTS: prints the EventLog to the console
+    private void printLog() {
+        for (Event e : EventLog.getInstance()) {
+            System.out.println(e);
         }
     }
 
